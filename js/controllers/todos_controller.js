@@ -1,4 +1,14 @@
 Todos.TodosController = Ember.ArrayController.extend({
+  sortProperties: ['priority'],
+
+  updateSortOrder: function(indexes) {
+    this.forEach(function(item) {
+      var index = indexes[item.get('id')];
+      item.set('priority', index);
+    }, this);
+    this.save();
+  },
+
   createTodo: function() {
     // Get the todo title set by the "New Todo" text field
     var t = this.get('title');

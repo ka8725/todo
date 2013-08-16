@@ -2,6 +2,7 @@ Todos.TodoController = Ember.ObjectController.extend({
   isEditing: false,
 
   saveTodo: function() {
+    // this.get('store').commit();
     var todo = this.get('model');
     todo.save();
     this.set('isEditing', false);

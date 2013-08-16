@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Ember.js • TodoMVC</title>
+    <title>Todo</title>
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
@@ -20,9 +20,9 @@
         </header>
 
           <section id="main">
-            <ul id="todo-list">
-              {{#each controller itemController='todo'}}
-                <li {{bindAttr class="isEditing:editing"}}>
+            <ul id="todo-list" class="sortable">
+              {{#each model itemController='todo'}}
+                <li {{bindAttr class="isEditing:editing"}} data-id="{{unbound id}}">
                   {{#if isEditing}}
                     {{partial 'todo/edit'}}
                     <button {{action "saveTodo"}} class="save-button"></button>
@@ -36,12 +36,12 @@
                 </li>
               {{/each}}
             </ul>
-
           </section>
       </section>
     </script>
 
     <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/jquery-ui.js"></script>
     <script src="js/libs/handlebars.js"></script>
     <script src="js/libs/ember.js"></script>
     <script src="js/libs/ember-data.js"></script>
