@@ -18,10 +18,18 @@
           <section id="main">
             <ul id="todo-list">
               {{#each controller itemController='todo'}}
-                <li>
-                  <label>{{priority}}</label>
-                  <label>{{title}}</label><label>{{dueDate}}</label>
-                  <button {{action "removeTodo"}} class="destroy"></button>
+                <li {{bindAttr class="isEditing:editing"}}>
+                  {{#if isEditing}}
+                    {{view Todos.EditTodoView valueBinding="title" class='edit-title'}}
+                    {{view Todos.EditTodoView valueBinding="priority"}}
+                    {{view Todos.EditTodoView valueBinding="dueDate"}}
+                  {{else}}
+                    <label>{{title}}</label>
+                    <label>{{priority}}</label>
+                    <label>{{dueDate}}</label>
+                    <button {{action "editTodo"}} class="edit-button"></button>
+                    <button {{action "removeTodo"}} class="destroy"></button>
+                  {{/if}}
                 </li>
               {{/each}}
             </ul>
@@ -42,5 +50,6 @@
     <script src="js/models/todo.js"></script>
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
+    <script src="js/views/edit_todo_view.js"></script>
   </body>
 </html>
