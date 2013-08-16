@@ -1,22 +1,26 @@
 Todos.Todo = DS.Model.extend({
   title: DS.attr('string'),
-  isCompleted: DS.attr('boolean')
+  dueDate: DS.attr('date'),
+  priority: DS.attr('number')
 });
 
 Todos.Todo.FIXTURES = [
  {
    id: 1,
    title: 'Learn Ember.js',
-   isCompleted: true
+   dueDate: '27.08.2013',
+   priority: 0
  },
  {
    id: 2,
-   title: '...',
-   isCompleted: false
+   title: 'Have an interview',
+   dueDate: '19.08.2013',
+   priority: 2
  },
  {
    id: 3,
-   title: 'Profit!',
-   isCompleted: false
+   title: 'Visit parents',
+   dueDate: '17.08.2013',
+   priority: 1
  }
 ];
