@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
+    <script type="text/x-handlebars" data-template-name='todo/_edit'>
+      {{view Ember.TextField class="input" placeholder="What needs to be done?" valueBinding="title"}}
+      {{view Todos.DateField class="input" placeholder="Due date" valueBinding="dueDate"}}
+      {{view Ember.TextField class="input" placeholder="Priority" valueBinding="priority"}}
+    </script>
+
     <script type="text/x-handlebars" data-template-name="todos">
       <section id="todoapp">
         <header id="header">
-          {{view Ember.TextField class="input" placeholder="What needs to be done?" valueBinding="title"}}
-          {{view Todos.DateField class="input" placeholder="Due date" valueBinding="dueDate"}}
-          {{view Ember.TextField class="input" placeholder="Priority" valueBinding="priority"}}
+          {{partial 'todo/edit'}}
           <button {{action "createTodo"}} class='add-todo'>Save</button>
         </header>
 
@@ -20,13 +24,12 @@
               {{#each controller itemController='todo'}}
                 <li {{bindAttr class="isEditing:editing"}}>
                   {{#if isEditing}}
-                    {{view Todos.EditTodoView valueBinding="title" class='edit-title'}}
-                    {{view Todos.EditTodoView valueBinding="priority"}}
-                    {{view Todos.EditTodoView valueBinding="dueDate"}}
+                    {{partial 'todo/edit'}}
+                    <button {{action "saveTodo"}} class="save-button"></button>
                   {{else}}
                     <label>{{title}}</label>
-                    <label>{{priority}}</label>
                     <label>{{dueDate}}</label>
+                    <label>{{priority}}</label>
                     <button {{action "editTodo"}} class="edit-button"></button>
                     <button {{action "removeTodo"}} class="destroy"></button>
                   {{/if}}
@@ -50,6 +53,7 @@
     <script src="js/models/todo.js"></script>
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
+    <script src="js/views/drag_todo_view.js"></script>
     <script src="js/views/edit_todo_view.js"></script>
   </body>
 </html>
