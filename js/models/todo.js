@@ -9,7 +9,7 @@ Todos.Todo.FIXTURES = [
    id: 1,
    title: 'Learn Ember.js',
    dueDate: new Date('27/08/2013'),
-   priority: 0
+   priority: 2
  },
  {
    id: 2,
@@ -21,6 +21,6 @@ Todos.Todo.FIXTURES = [
    id: 3,
    title: 'Visit parents',
    dueDate: new Date('17/08/2013'),
-   priority: 2
+   priority: 0
  }
 ];

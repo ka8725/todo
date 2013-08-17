@@ -21,7 +21,7 @@
 
           <section id="main">
             <ul id="todo-list" class="sortable">
-              {{#each model itemController='todo'}}
+              {{#each controller itemController='todo'}}
                 <li {{bindAttr class="isEditing:editing"}} data-id="{{unbound id}}">
                   {{#if isEditing}}
                     {{partial 'todo/edit'}}

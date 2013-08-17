@@ -3,10 +3,10 @@ Todos.TodosView = Ember.View.extend({
     var controller = this.get('controller');
     this.$(".sortable").sortable({
       update: function(event, ui) {
-        var indexes = [];
+        var indexes = {};
 
         $(this).find('li').each(function(index) {
-          indexes[index] = $(this).data('id');
+          indexes[$(this).data('id')] = index;
         });
 
         $(this).sortable('cancel');
