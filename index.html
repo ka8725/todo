@@ -25,13 +25,13 @@
                 <li {{bindAttr class="isEditing:editing"}} data-id="{{unbound id}}">
                   {{#if isEditing}}
                     {{partial 'todo/edit'}}
-                    <button {{action "saveTodo"}} class="save-button"></button>
+                    <button {{action "saveTodo"}} class="save-button">Save</button>
                   {{else}}
                     <label>{{title}}</label>
                     <label>{{dueDate}}</label>
                     <label>{{priority}}</label>
-                    <button {{action "editTodo"}} class="edit-button"></button>
-                    <button {{action "removeTodo"}} class="destroy"></button>
+                    <button {{action "editTodo"}} class="edit-button">Edit</button>
+                    <button {{action "removeTodo"}} class="destroy">Delete</button>
                   {{/if}}
                 </li>
               {{/each}}
