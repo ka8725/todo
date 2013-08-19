@@ -1,6 +1,7 @@
 Todos.Router.map(function () {
   this.resource('todos');
   this.route('login');
+  this.route('logout');
   this.route('register');
 });
 

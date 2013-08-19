@@ -8,9 +8,13 @@
 
     <script type="text/x-handlebars">
       <div>
-        {{#linkTo 'register'}}register{{/linkTo}}
-        {{#linkTo 'login'}}login{{/linkTo}}
-        {{#linkTo 'todos'}}todos{{/linkTo}}
+        {{#if loggedIn}}
+          {{#linkTo 'todos'}}todos{{/linkTo}}
+          {{#linkTo 'logout'}}logout{{/linkTo}}
+        {{else}}
+          {{#linkTo 'register'}}register{{/linkTo}}
+          {{#linkTo 'login'}}login{{/linkTo}}
+        {{/if}}
       </div>
       <br>
       {{outlet}}
@@ -18,6 +22,16 @@
 
 
     <script type="text/x-handlebars" data-template-name='register'>
+      {{#if loggedIn}}
+        <p>You are already registered!</p>
+      {{else}}
+        {{input value=username type="text" placeholder="Username"}}
+        {{input value=password placeholder="Password"}}
+        <button {{action "register"}}>Register</button>
+        {{#if errorMessage}}
+          <div class="alert alert-error">{{errorMessage}}</div>
+        {{/if}}
+      {{/if}}
     </script>
 
 
@@ -88,6 +102,8 @@
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
     <script src="js/controllers/login_controller.js"></script>
+    <script src="js/controllers/register_controller.js"></script>
+    <script src="js/controllers/application_controller.js"></script>
     <script src="js/views/drag_todo_view.js"></script>
     <script src="js/views/edit_todo_view.js"></script>
   </body>
