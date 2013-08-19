@@ -93,7 +93,7 @@ post '/todos' do
     if todo.save
       'OK'
     else
-      halt 400, todo.errors.full_messages.to_json
+      halt 400, {:errors => todo.errors}.to_json
     end
   else
     halt 403, 'user not found or token is not provided'
