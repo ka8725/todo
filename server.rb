@@ -16,6 +16,9 @@ ActiveRecord::Base.establish_connection(
 
 
 class User < ActiveRecord::Base
+  validates :username, :password, :presence => true
+  validates :username, :uniqueness => true
+
   def self.auth(username, pwd)
     find_by_username_and_password(username, pwd)
   end
@@ -45,5 +48,16 @@ post '/login.json' do
     {:token => user.token}.to_json
   else
     halt 400, 'user not found'
+  end
+end
+
+
+post '/register.json' do
+  user = User.new({:username => params[:username], :password => params[:password]})
+
+  if user.save
+    'OK'
+  else
+    halt 400, user.errors.full_messages.to_json
   end
 end

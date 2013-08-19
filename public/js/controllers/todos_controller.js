@@ -2,10 +2,8 @@ App.TodosController = Ember.ArrayController.extend({
   sortProperties: ['priority'],
 
   updateSortOrder: function(indexes) {
-    console.log(indexes);
     this.forEach(function(item) {
       var index = indexes[item.get('id')];
-      console.log(index, item);
       item.set('priority', index);
     }, this);
   },

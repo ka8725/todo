@@ -5,21 +5,16 @@ App.RegisterController = Ember.Controller.extend({
     // Clear out any error messages.
     this.set('errorMessage', null);
 
-    $.post('/register.json', data).then(function(response) {
+    $.post('/register.json', data)
+      .done(function(response) {
 
-      self.set('errorMessage', response.message);
-      if (response.success) {
-        alert('Login succeeded!');
-        self.set('token', response.token);
-
-        var attemptedTransition = self.get('attemptedTransition');
-        if (attemptedTransition) {
-          attemptedTransition.retry();
-          self.set('attemptedTransition', null);
-        } else {
-          self.transitionToRoute('todos');
-        }
-      }
-    });
+        alert('Registration successfull!')
+        self.set('errorMessage', null);
+        self.set('username', '');
+        self.set('password', '');
+      })
+      .fail(function(response) {
+        self.set('errorMessage', response.responseText);
+      });
   }
 });
