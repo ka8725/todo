@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20130819202248) do
   enable_extension "plpgsql"
 
   create_table "todos", force: true do |t|
+    t.integer  "user_id"
     t.string   "title"
     t.datetime "due_date"
     t.integer  "priority"

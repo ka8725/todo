@@ -13,8 +13,15 @@ App.LoginRoute = Ember.Route.extend({
 App.AuthenticatedRoute = Ember.Route.extend({
 
   beforeModel: function(transition) {
-    if (!this.controllerFor('login').get('token')) {
+    var token = this.controllerFor('login').get('token');
+    if (!token) {
       this.redirectToLogin(transition);
+    } else {
+      $.ajaxSetup({
+        headers: {
+          'X-ACCESS-TOKEN': token
+        }
+      });
     }
   },
 

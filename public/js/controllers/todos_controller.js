@@ -9,39 +9,14 @@ App.TodosController = Ember.ArrayController.extend({
   },
 
   createTodo: function() {
-    // Get the todo title set by the "New Todo" text field
-    var t = this.get('title');
-    var d = this.get('dueDate');
-    var p = this.get('priority');
+    var data = this.getProperties('title', 'due_date', 'priority')
 
-    if (!this.validateFields(t, d, p)) {
-      alert('Some field is empty!');
-      return;
-    }
+    var todo = App.Todo.createRecord(data);
 
-    // Create the new Todo model
-    var todo = App.Todo.createRecord({
-      title: t,
-      dueDate: d,
-      priority: p
-    });
-
-    // Clear the "New Todo" text field
     this.set('title', '');
-    this.set('dueDate', '');
+    this.set('due_date', '');
     this.set('priority', '');
 
-    // Save the new model
     todo.save();
-  },
-
-  validateFields: function() {
-    for (i = 0; i < arguments.length; i++) {
-      arg = arguments[i];
-      if (!arg || !arg.trim()) {
-        return false;
-      }
-    }
-    return true;
   }
 });

@@ -48,7 +48,7 @@
     <script type="text/x-handlebars" data-template-name='todo/_edit'>
       {{input type='number' class="input" placeholder="Priority" value=priority}}
       {{input class="input" placeholder="What needs to be done?" value=title}}
-      {{input type='date' class="input" placeholder="Due date" value=dueDate}}
+      {{input type='date' class="input" placeholder="Due date" value=due_date}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="todos">
@@ -68,7 +68,7 @@
                   {{else}}
                     <label>{{priority}}</label>
                     <label>{{title}}</label>
-                    <label>{{date dueDate}}</label>
+                    <label>{{date due_date}}</label>
                     <button {{action "editTodo"}} class="edit-button">Edit</button>
                     <button {{action "removeTodo"}} class="destroy">Delete</button>
                   {{/if}}

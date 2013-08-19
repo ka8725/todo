@@ -5,7 +5,7 @@ App.RegisterController = Ember.Controller.extend({
     // Clear out any error messages.
     this.set('errorMessage', null);
 
-    $.post('/register.json', data)
+    $.post('/register', data)
       .done(function(response) {
 
         alert('Registration successfull!')

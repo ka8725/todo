@@ -20,7 +20,7 @@ App.LoginController = Ember.Controller.extend({
     // Clear out any error messages.
     this.set('errorMessage', null);
 
-    $.post('/login.json', data)
+    $.post('/login', data)
       .done(function(response) {
         self.set('token', response.token);
 
