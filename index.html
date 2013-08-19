@@ -7,9 +7,9 @@
   </head>
   <body>
     <script type="text/x-handlebars" data-template-name='todo/_edit'>
+      {{input type='number' class="input" placeholder="Priority" valueBinding="priority"}}
       {{input class="input" placeholder="What needs to be done?" valueBinding="title"}}
       {{input type='date' class="input" placeholder="Due date" valueBinding="dueDate"}}
-      {{input type='number' class="input" placeholder="Priority" valueBinding="priority"}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="todos">
@@ -27,9 +27,9 @@
                     {{partial 'todo/edit'}}
                     <button {{action "saveTodo"}} class="save-button">Save</button>
                   {{else}}
-                    <label>{{title}}</label>
-                    <label>{{dueDate}}</label>
                     <label>{{priority}}</label>
+                    <label>{{title}}</label>
+                    <label>{{date dueDate}}</label>
                     <button {{action "editTodo"}} class="edit-button">Edit</button>
                     <button {{action "removeTodo"}} class="destroy">Delete</button>
                   {{/if}}
@@ -45,6 +45,7 @@
     <script src="js/libs/handlebars.js"></script>
     <script src="js/libs/ember.js"></script>
     <script src="js/libs/ember-data.js"></script>
+    <script src="js/libs/moment.js"></script>
 
     <script src="js/application.js"></script>
     <script src="js/router.js"></script>

@@ -1,6 +1,5 @@
 window.Todos = Ember.Application.create();
 
-
 Todos.DateField = Ember.TextField.extend({
   type: 'date',
   hasFocus: false,
@@ -31,4 +30,9 @@ Todos.DateField = Ember.TextField.extend({
     this.set('hasFocus', false);
     return this.updateValue();
   }
+});
+
+
+Ember.Handlebars.registerBoundHelper('date', function(date) {
+  return moment(date).format('MMMM Do YYYY, h:mm:ss a');;
 });
