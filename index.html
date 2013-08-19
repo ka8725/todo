@@ -3,20 +3,53 @@
   <head>
     <meta charset="utf-8">
     <title>Todo</title>
-    <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
+
+    <script type="text/x-handlebars">
+      <div>
+        {{#linkTo 'register'}}register{{/linkTo}}
+        {{#linkTo 'login'}}login{{/linkTo}}
+        {{#linkTo 'todos'}}todos{{/linkTo}}
+      </div>
+      <br>
+      {{outlet}}
+    </script>
+
+
+    <script type="text/x-handlebars" data-template-name='register'>
+    </script>
+
+
+    <script type="text/x-handlebars" data-template-name='index'>
+      Welcome to the todo system.
+    </script>
+
+
+     <script type="text/x-handlebars" data-template-name="login">
+        {{#if loggedIn}}
+          <p>You are already logged in!</p>
+        {{else}}
+          {{input value=username type="text" placeholder="Username"}}
+          {{input value=password placeholder="Password"}}
+          <button {{action "login"}}>Login</button>
+          {{#if errorMessage}}
+            <div class="alert alert-error">{{errorMessage}}</div>
+          {{/if}}
+        {{/if}}
+      </script>
+
     <script type="text/x-handlebars" data-template-name='todo/_edit'>
-      {{input type='number' class="input" placeholder="Priority" valueBinding="priority"}}
-      {{input class="input" placeholder="What needs to be done?" valueBinding="title"}}
-      {{input type='date' class="input" placeholder="Due date" valueBinding="dueDate"}}
+      {{input type='number' class="input" placeholder="Priority" value=priority}}
+      {{input class="input" placeholder="What needs to be done?" value=title}}
+      {{input type='date' class="input" placeholder="Due date" value=dueDate}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="todos">
       <section id="todoapp">
         <header id="header">
           {{partial 'todo/edit'}}
-          <button {{action "createTodo"}} class='add-todo'>Save</button>
+          <button {{action "createTodo"}}>Save</button>
         </header>
 
           <section id="main">
@@ -54,6 +87,7 @@
     <script src="js/models/todo.js"></script>
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
+    <script src="js/controllers/login_controller.js"></script>
     <script src="js/views/drag_todo_view.js"></script>
     <script src="js/views/edit_todo_view.js"></script>
   </body>
