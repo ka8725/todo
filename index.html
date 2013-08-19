@@ -7,9 +7,9 @@
   </head>
   <body>
     <script type="text/x-handlebars" data-template-name='todo/_edit'>
-      {{view Ember.TextField class="input" placeholder="What needs to be done?" valueBinding="title"}}
-      {{view Todos.DateField class="input" placeholder="Due date" valueBinding="dueDate"}}
-      {{view Ember.TextField class="input" placeholder="Priority" valueBinding="priority"}}
+      {{input class="input" placeholder="What needs to be done?" valueBinding="title"}}
+      {{input type='date' class="input" placeholder="Due date" valueBinding="dueDate"}}
+      {{input type='number' class="input" placeholder="Priority" valueBinding="priority"}}
     </script>
 
     <script type="text/x-handlebars" data-template-name="todos">
