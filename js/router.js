@@ -49,3 +49,14 @@ Todos.TodosRoute = Todos.AuthenticatedRoute.extend({
     return Todos.Todo.find();
   }
 });
+
+Todos.ApplicationRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    if (localStorage.token) {
+      controller.loggedIn = true;
+    } else {
+      controller.loggedIn = false;
+    }
+    this._super(controller, model);
+  }
+});

@@ -10,7 +10,7 @@
       <div>
         {{#if loggedIn}}
           {{#linkTo 'todos'}}todos{{/linkTo}}
-          {{#linkTo 'logout'}}logout{{/linkTo}}
+          <button {{action logout}}>Log Out</button>
         {{else}}
           {{#linkTo 'register'}}register{{/linkTo}}
           {{#linkTo 'login'}}login{{/linkTo}}

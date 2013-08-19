@@ -1,3 +1,7 @@
 Todos.ApplicationController = Ember.Controller.extend({
-  loggedIn: this.controllerFor('login').get('token')
+  logout: function() {
+    this.set('loggedIn', false);
+    localStorage.clear();
+    this.transitionToRoute('login');
+  }
 });

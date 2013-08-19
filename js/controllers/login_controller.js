@@ -26,6 +26,7 @@ Todos.LoginController = Ember.Controller.extend({
       if (response.success) {
         alert('Login succeeded!');
         self.set('token', response.token);
+        self.get('controllers.application').set('loggedIn', true);
 
         var attemptedTransition = self.get('attemptedTransition');
         if (attemptedTransition) {
