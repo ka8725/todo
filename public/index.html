@@ -8,30 +8,22 @@
 
     <script type="text/x-handlebars">
       <div>
-        {{#if loggedIn}}
-          {{#linkTo 'todos'}}todos{{/linkTo}}
-          <button {{action logout}}>Log Out</button>
-        {{else}}
-          {{#linkTo 'register'}}register{{/linkTo}}
-          {{#linkTo 'login'}}login{{/linkTo}}
-        {{/if}}
+        {{#linkTo 'todos'}}todos{{/linkTo}}
+        {{#linkTo 'register'}}register{{/linkTo}}
+        {{#linkTo 'login'}}login{{/linkTo}}
       </div>
       <br>
       {{outlet}}
     </script>
 
-
     <script type="text/x-handlebars" data-template-name='register'>
-      {{#if loggedIn}}
-        <p>You are already registered!</p>
-      {{else}}
-        {{input value=username type="text" placeholder="Username"}}
-        {{input value=password placeholder="Password"}}
-        <button {{action "register"}}>Register</button>
-        {{#if errorMessage}}
-          <div class="alert alert-error">{{errorMessage}}</div>
-        {{/if}}
+      {{input value=username type="text" placeholder="Username"}}
+      {{input value=password placeholder="Password"}}
+      <button {{action "register"}}>Register</button>
+      {{#if errorMessage}}
+        <div>{{errorMessage}}</div>
       {{/if}}
+
     </script>
 
 
@@ -41,14 +33,14 @@
 
 
      <script type="text/x-handlebars" data-template-name="login">
-        {{#if loggedIn}}
+        {{#if token}}
           <p>You are already logged in!</p>
         {{else}}
           {{input value=username type="text" placeholder="Username"}}
           {{input value=password placeholder="Password"}}
           <button {{action "login"}}>Login</button>
           {{#if errorMessage}}
-            <div class="alert alert-error">{{errorMessage}}</div>
+            <div>{{errorMessage}}</div>
           {{/if}}
         {{/if}}
       </script>
@@ -101,9 +93,8 @@
     <script src="js/models/todo.js"></script>
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
-    <script src="js/controllers/login_controller.js"></script>
     <script src="js/controllers/register_controller.js"></script>
-    <script src="js/controllers/application_controller.js"></script>
+    <script src="js/controllers/login_controller.js"></script>
     <script src="js/views/drag_todo_view.js"></script>
     <script src="js/views/edit_todo_view.js"></script>
   </body>

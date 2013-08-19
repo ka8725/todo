@@ -1,4 +1,4 @@
-Todos.TodoController = Ember.ObjectController.extend({
+App.TodoController = Ember.ObjectController.extend({
   isEditing: false,
 
   saveTodo: function() {

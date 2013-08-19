@@ -1,8 +1,6 @@
-window.Todos = Ember.Application.create({
-  API_URL: 'http://localhost:3000'
-});
+window.App = Ember.Application.create();
 
-Todos.DateField = Ember.TextField.extend({
+App.DateField = Ember.TextField.extend({
   type: 'date',
   hasFocus: false,
   init: function() {

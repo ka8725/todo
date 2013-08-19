@@ -1,4 +1,4 @@
-Todos.LoginController = Ember.Controller.extend({
+App.LoginController = Ember.Controller.extend({
 
   reset: function() {
     this.setProperties({
@@ -9,24 +9,20 @@ Todos.LoginController = Ember.Controller.extend({
   },
 
   token: localStorage.token,
-
   tokenChanged: function() {
     localStorage.token = this.get('token');
   }.observes('token'),
 
   login: function() {
+
     var self = this, data = this.getProperties('username', 'password');
 
     // Clear out any error messages.
     this.set('errorMessage', null);
 
-    $.post(Todos.API_URL + '/login.json', data).then(function(response) {
-
-      self.set('errorMessage', response.message);
-      if (response.success) {
-        alert('Login succeeded!');
+    $.post('/login.json', data)
+      .done(function(response) {
         self.set('token', response.token);
-        self.get('controllers.application').set('loggedIn', true);
 
         var attemptedTransition = self.get('attemptedTransition');
         if (attemptedTransition) {
@@ -35,7 +31,9 @@ Todos.LoginController = Ember.Controller.extend({
         } else {
           self.transitionToRoute('todos');
         }
-      }
-    });
+      })
+      .fail(function(response) {
+        self.set('errorMessage', response.responseText);
+      });
   }
 });

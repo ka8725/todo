@@ -1,18 +1,17 @@
-Todos.Router.map(function () {
+App.Router.map(function () {
   this.resource('todos');
   this.route('login');
-  this.route('logout');
   this.route('register');
 });
 
-Todos.LoginRoute = Ember.Route.extend({
+App.LoginRoute = Ember.Route.extend({
   setupController: function(controller, context) {
     controller.reset();
   }
 });
 
+App.AuthenticatedRoute = Ember.Route.extend({
 
-Todos.AuthenticatedRoute = Ember.Route.extend({
   beforeModel: function(transition) {
     if (!this.controllerFor('login').get('token')) {
       this.redirectToLogin(transition);
@@ -43,20 +42,8 @@ Todos.AuthenticatedRoute = Ember.Route.extend({
   }
 });
 
-
-Todos.TodosRoute = Todos.AuthenticatedRoute.extend({
+App.TodosRoute = App.AuthenticatedRoute.extend({
   model: function () {
-    return Todos.Todo.find();
-  }
-});
-
-Todos.ApplicationRoute = Ember.Route.extend({
-  setupController: function(controller, model) {
-    if (localStorage.token) {
-      controller.loggedIn = true;
-    } else {
-      controller.loggedIn = false;
-    }
-    this._super(controller, model);
+    return App.Todo.find();
   }
 });

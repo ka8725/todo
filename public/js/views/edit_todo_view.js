@@ -1,4 +1,4 @@
-Todos.EditTodoView = Ember.TextField.extend({
+App.EditTodoView = Ember.TextField.extend({
   classNames: ['edit'],
 
   insertNewline: function () {

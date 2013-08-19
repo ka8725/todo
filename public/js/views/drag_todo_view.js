@@ -1,4 +1,4 @@
-Todos.TodosView = Ember.View.extend({
+App.TodosView = Ember.View.extend({
   didInsertElement: function() {
     var controller = this.get('controller');
     this.$(".sortable").sortable({

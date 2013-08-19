@@ -1,4 +1,4 @@
-Todos.TodosController = Ember.ArrayController.extend({
+App.TodosController = Ember.ArrayController.extend({
   sortProperties: ['priority'],
 
   updateSortOrder: function(indexes) {
@@ -22,7 +22,7 @@ Todos.TodosController = Ember.ArrayController.extend({
     }
 
     // Create the new Todo model
-    var todo = Todos.Todo.createRecord({
+    var todo = App.Todo.createRecord({
       title: t,
       dueDate: d,
       priority: p

@@ -1,10 +1,10 @@
-Todos.Todo = DS.Model.extend({
+App.Todo = DS.Model.extend({
   title: DS.attr('string'),
   dueDate: DS.attr('date'),
   priority: DS.attr('number')
 });
 
-Todos.Todo.FIXTURES = [
+App.Todo.FIXTURES = [
  {
    id: 1,
    title: 'Learn Ember.js',
