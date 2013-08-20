@@ -72,34 +72,65 @@ post '/register' do
   if user.save
     'OK'
   else
-    halt 400, user.errors.full_messages.to_json
+    halt 422, user.errors.to_json
   end
 end
 
 
 get '/todos' do
-  if current_user
+  with_current_user do
     {:todos => current_user.todos}.to_json
-  else
-    halt 403, 'user not found or token is not provided'
   end
 end
 
 post '/todos' do
-  if current_user
-    ps = JSON.parse(request.body.read)
-    todo = current_user.todos.build(ps['todo'])
+  with_current_user do
+    todo = current_user.todos.build(todo_params)
 
     if todo.save
       'OK'
     else
-      halt 400, {:errors => todo.errors}.to_json
+      halt 422, todo.errors.to_json
     end
-  else
-    halt 403, 'user not found or token is not provided'
+  end
+end
+
+put '/todos/:id' do
+  with_current_user do
+    todo = current_user.todos.find(params[:id])
+    if todo.update_attributes(todo_params)
+      'OK'
+    else
+      halt 422, todo.errors.to_json
+    end
+  end
+end
+
+delete '/todos/:id' do
+  with_current_user do
+    todo = current_user.todos.find(params[:id])
+
+    if todo.destroy
+      'OK'
+    else
+      halt 422, todo.errors.to_json
+    end
   end
 end
 
 def current_user
   @current_user ||= User.find_by_token(env['HTTP_X_ACCESS_TOKEN'])
+end
+
+
+def with_current_user
+  if current_user
+    yield
+  else
+    halt 403, 'user not found or token is not provided'
+  end
+end
+
+def todo_params
+  JSON.parse(request.body.read)['todo']
 end

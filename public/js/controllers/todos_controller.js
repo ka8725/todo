@@ -6,6 +6,8 @@ App.TodosController = Ember.ArrayController.extend({
       var index = indexes[item.get('id')];
       item.set('priority', index);
     }, this);
+
+    this.get('store').commit();
   },
 
   createTodo: function() {

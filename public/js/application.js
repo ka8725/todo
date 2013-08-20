@@ -34,5 +34,7 @@ App.DateField = Ember.TextField.extend({
 
 
 Ember.Handlebars.registerBoundHelper('date', function(date) {
-  return moment(date).format('MMMM Do YYYY, h:mm:ss a');;
+  if (date) {
+    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+  }
 });

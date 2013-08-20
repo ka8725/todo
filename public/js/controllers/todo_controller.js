@@ -2,16 +2,17 @@ App.TodoController = Ember.ObjectController.extend({
   isEditing: false,
 
   saveTodo: function() {
-    // this.get('store').commit();
     var todo = this.get('model');
-    todo.save();
+    var data = this.getProperties('priority', 'title', 'due_date');
+    todo.setProperties(data);
     this.set('isEditing', false);
+    this.get('store').commit();
   },
 
   removeTodo: function() {
     var todo = this.get('model');
     todo.deleteRecord();
-    todo.save();
+    this.get('store').commit();
   },
 
   editTodo: function () {
@@ -20,6 +21,5 @@ App.TodoController = Ember.ObjectController.extend({
 
   acceptChanges: function () {
     this.set('isEditing', false);
-    this.get('model').save();
   }
 });
