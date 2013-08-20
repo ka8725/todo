@@ -61,7 +61,7 @@ post '/login' do
   if user = User.auth(params[:username], params[:password])
     {:token => user.token}.to_json
   else
-    halt 400, 'user not found'
+    halt 400, {:error => 'user not found'}.to_json
   end
 end
 
@@ -70,7 +70,7 @@ post '/register' do
   user = User.new({:username => params[:username], :password => params[:password]})
 
   if user.save
-    'OK'
+    user.to_json
   else
     halt 422, user.errors.to_json
   end
@@ -88,7 +88,7 @@ post '/todos' do
     todo = current_user.todos.build(todo_params)
 
     if todo.save
-      'OK'
+      todo.to_json
     else
       halt 422, todo.errors.to_json
     end
@@ -99,7 +99,7 @@ put '/todos/:id' do
   with_current_user do
     todo = current_user.todos.find(params[:id])
     if todo.update_attributes(todo_params)
-      'OK'
+      todo.to_json
     else
       halt 422, todo.errors.to_json
     end
@@ -111,7 +111,7 @@ delete '/todos/:id' do
     todo = current_user.todos.find(params[:id])
 
     if todo.destroy
-      'OK'
+      todo.to_json
     else
       halt 422, todo.errors.to_json
     end
@@ -127,7 +127,7 @@ def with_current_user
   if current_user
     yield
   else
-    halt 403, 'user not found or token is not provided'
+    halt 403, {:error => 'user not found or token is not provided'}.to_json
   end
 end
 

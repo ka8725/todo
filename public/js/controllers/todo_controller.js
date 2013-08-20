@@ -2,11 +2,8 @@ App.TodoController = Ember.ObjectController.extend({
   isEditing: false,
 
   saveTodo: function() {
-    var todo = this.get('model');
-    var data = this.getProperties('priority', 'title', 'due_date');
-    todo.setProperties(data);
-    this.set('isEditing', false);
     this.get('store').commit();
+    this.set('isEditing', false);
   },
 
   removeTodo: function() {
