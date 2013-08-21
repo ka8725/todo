@@ -1,4 +1,6 @@
-window.App = Ember.Application.create();
+window.App = Ember.Application.create({
+  LOG_TRANSITIONS: true
+});
 
 App.DateField = Ember.TextField.extend({
   type: 'date',
@@ -35,6 +37,9 @@ App.DateField = Ember.TextField.extend({
 
 Ember.Handlebars.registerBoundHelper('date', function(date) {
   if (date) {
-    return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+    return moment(date).format('MMMM Do YYYY');
   }
 });
+
+
+App.LoadingRoute = Ember.Route.extend({});

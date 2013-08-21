@@ -10,15 +10,23 @@ App.TodosController = Ember.ArrayController.extend({
     this.get('store').commit();
   },
 
-  createTodo: function() {
-    var data = this.getProperties('title', 'due_date', 'priority')
-
+  createTodo: function(todo) {
+    var data = this.getProperties('title', 'priority', 'due_date');
     var todo = App.Todo.createRecord(data);
 
-    this.set('title', '');
-    this.set('due_date', '');
-    this.set('priority', '');
+    var self = this;
 
+    todo.on('becameInvalid', function(todo) {
+      // show errors on the form. code goes here
+      console.log(todo.errors);
+    });
+
+    todo.on('didCreate', function() {
+      // render list. code goes here
+      self.set('title', '');
+      self.set('priority', '');
+      self.set('due_date', '');
+    });
     todo.save();
   }
 });

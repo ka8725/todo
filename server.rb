@@ -1,33 +1,28 @@
 require 'sinatra'
 require 'json'
+require 'yaml'
 require 'sinatra/activerecord'
 require 'securerandom'
+require 'bcrypt'
 require 'debugger'
 
 # ActiveRecord::Base.include_root_in_json = true
 
+dbconfig = (YAML.load_file('config/database.yml') || {}).merge(:encoding => 'utf8')
+ActiveRecord::Base.establish_connection(dbconfig)
+
 before { content_type :json }
 
-db = URI.parse('postgres://ka8725:@localhost/todos')
-
-ActiveRecord::Base.establish_connection(
-  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-  :host     => db.host,
-  :username => db.user,
-  :password => db.password,
-  :database => db.path[1..-1],
-  :encoding => 'utf8'
-)
-
-
 class User < ActiveRecord::Base
+  has_secure_password
+
   validates :username, :password, :presence => true
   validates :username, :uniqueness => true
 
   has_many :todos
 
   def self.auth(username, pwd)
-    find_by_username_and_password(username, pwd)
+    find_by_username(username) if user.authenticate(pwd)
   end
 
   def token
@@ -90,7 +85,7 @@ post '/todos' do
     if todo.save
       todo.to_json
     else
-      halt 422, todo.errors.to_json
+      halt 422, {:errors => todo.errors}.to_json
     end
   end
 end
