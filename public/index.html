@@ -12,10 +12,14 @@
 
     <script type="text/x-handlebars">
       <div>
-        {{#linkTo 'todos'}}todos{{/linkTo}}
-        {{#linkTo 'register'}}register{{/linkTo}}
-        {{#linkTo 'login'}}login{{/linkTo}}
-        {{#linkTo 'logout'}}logout{{/linkTo}}
+        {{#if isLoggedIn}}
+          {{#linkTo 'todos'}}todos{{/linkTo}}
+          {{#linkTo 'logout'}}logout{{/linkTo}}
+          {{#linkTo 'register'}}register{{/linkTo}}
+        {{else}}
+          {{#linkTo 'register'}}register{{/linkTo}}
+          {{#linkTo 'login'}}login{{/linkTo}}
+        {{/if}}
       </div>
       <br>
       {{outlet}}
@@ -92,7 +96,7 @@
 
           <section id="main">
             <ul id="todo-list" class="sortable">
-              {{#each controller itemController='todo'}}
+              {{#each model itemController='todo'}}
                 {{#unless isNew}}
                   <li data-id="{{unbound id}}">
                     <label>{{priority}}</label>

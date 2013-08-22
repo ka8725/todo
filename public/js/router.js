@@ -18,6 +18,15 @@ App.LoginRoute = Ember.Route.extend({
 
 App.AuthenticatedRoute = Ember.Route.extend({
 
+  setupController: function(controller, model) {
+    var token = this.controllerFor('login').get('token');
+
+    if (token) {
+      this.controllerFor('application').set('isLoggedIn', true);
+    }
+    this._super(controller, model);
+  },
+
   beforeModel: function(transition) {
     var token = this.controllerFor('login').get('token');
     if (!token) {
@@ -69,6 +78,7 @@ App.TodoRoute = App.AuthenticatedRoute.extend({
 App.LogoutRoute = Ember.Route.extend({
   redirect: function() {
     this.controllerFor('login').set('token', null);
+    this.controllerFor('application').set('isLoggedIn', false);
     this.transitionTo('login');
   }
 });
