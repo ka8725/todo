@@ -40,6 +40,7 @@ class Todo < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :priority
   validates_presence_of :due_date
+  validates_presence_of :user
   validates_numericality_of :priority, :only_integer => true
 
   belongs_to :user
@@ -48,7 +49,8 @@ end
 set :public_folder, 'public'
 
 get '/' do
-  redirect '/index.html'
+  content_type :html
+  send_file File.join(settings.public_folder, 'index.html')
 end
 
 post '/login' do
