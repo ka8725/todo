@@ -35,30 +35,44 @@
     </script>
 
 
-     <script type="text/x-handlebars" data-template-name="login">
-        {{#if token}}
-          <p>You are already logged in!</p>
-        {{else}}
-          {{input value=username type="text" placeholder="Username"}}
-          {{input value=password placeholder="Password"}}
-          <button {{action "login"}}>Login</button>
-          {{#if errorMessage}}
-            <div>{{errorMessage}}</div>
-          {{/if}}
+    <script type="text/x-handlebars" data-template-name="login">
+      {{#if token}}
+        <p>You are already logged in!</p>
+      {{else}}
+        {{input value=username type="text" placeholder="Username"}}
+        {{input value=password placeholder="Password"}}
+        <button {{action "login"}}>Login</button>
+        {{#if errorMessage}}
+          <div>{{errorMessage}}</div>
         {{/if}}
-      </script>
+      {{/if}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="todos/new">
+      {{input type='number' class="input" placeholder="Priority" value=priority}}
+      <span>{{errors.priority}}</span>
+      {{input class="input" placeholder="What needs to be done?" value=title}}
+      <span>{{errors.title}}</span>
+      {{input type='date' class="input" placeholder="Due date" value=due_date}}
+      <span>{{errors.due_date}}</span>
+
+      <button {{action "create"}}>Create</button>
+    </script>
 
     <script type="text/x-handlebars" data-template-name='todo/_edit'>
       {{input type='number' class="input" placeholder="Priority" value=priority}}
+      <span>{{errors.priority}}</span>
       {{input class="input" placeholder="What needs to be done?" value=title}}
+      <span>{{errors.title}}</span>
       {{input type='date' class="input" placeholder="Due date" value=due_date}}
+      <span>{{errors.due_date}}</span>
     </script>
 
     <script type="text/x-handlebars" data-template-name="todos">
       <section id="todoapp">
         <header id="header">
-          {{partial 'todo/edit'}}
-          <button {{action "createTodo"}}>Save</button>
+          {{#linkTo 'todos.new'}}New{{/linkTo}}
+          {{outlet}}
         </header>
 
           <section id="main">
@@ -97,6 +111,7 @@
     <script src="js/models/store.js"></script>
     <script src="js/models/todo.js"></script>
     <script src="js/controllers/todos_controller.js"></script>
+    <script src="js/controllers/todos_new_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
     <script src="js/controllers/register_controller.js"></script>
     <script src="js/controllers/login_controller.js"></script>

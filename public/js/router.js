@@ -1,5 +1,7 @@
 App.Router.map(function () {
-  this.resource('todos');
+  this.resource('todos', function() {
+    this.route('new');
+  });
   this.route('login');
   this.route('register');
 });
@@ -50,7 +52,13 @@ App.AuthenticatedRoute = Ember.Route.extend({
 });
 
 App.TodosRoute = App.AuthenticatedRoute.extend({
-  model: function () {
+  model: function() {
+    return App.Todo.find();
+  }
+});
+
+App.TodosNewRoute = App.AuthenticatedRoute.extend({
+  model: function() {
     return App.Todo.find();
   }
 });
