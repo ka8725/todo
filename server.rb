@@ -134,7 +134,7 @@ def with_current_user
   if current_user
     yield
   else
-    halt 403, {:error => 'user not found or token is not provided'}.to_json
+    halt 403, {:error => 'Token is not provided or expired. Please logout and login again'}.to_json
   end
 end
 

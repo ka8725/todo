@@ -82,3 +82,12 @@ App.LogoutRoute = Ember.Route.extend({
     this.transitionTo('login');
   }
 });
+
+App.ApplicationRoute = Ember.Route.extend({
+  setupController: function(controller, model) {
+    if (localStorage.token) {
+      controller.set('isLoggedIn', true);
+    }
+    this._super(controller, model);
+  }
+});
