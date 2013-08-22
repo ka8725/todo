@@ -30,6 +30,7 @@ App.AuthenticatedRoute = Ember.Route.extend({
   beforeModel: function(transition) {
     var token = this.controllerFor('login').get('token');
     if (!token) {
+      localStorage.removeItem('token');
       this.redirectToLogin(transition);
     } else {
       $.ajaxSetup({
@@ -78,7 +79,6 @@ App.TodoRoute = App.AuthenticatedRoute.extend({
 App.LogoutRoute = Ember.Route.extend({
   redirect: function() {
     this.controllerFor('login').set('token', null);
-    this.controllerFor('application').set('isLoggedIn', false);
     this.transitionTo('login');
   }
 });

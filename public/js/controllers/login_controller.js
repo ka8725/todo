@@ -13,6 +13,7 @@ App.LoginController = Ember.Controller.extend({
     var t = this.get('token');
     if (t == null) {
       localStorage.removeItem('token');
+      this.controllerFor('application').set('isLoggedIn', false);
     } else {
       localStorage.token = t;
     }
