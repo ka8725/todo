@@ -1,9 +1,10 @@
 App.Router.map(function () {
   this.resource('todos', function() {
+    this.resource('todo', { path: '/todo/:todo_id' }, function() {
+      this.route('edit');
+    });
+
     this.route('new');
-  });
-  this.resource('todo', { path: '/todo/:todo_id' }, function() {
-    this.route('edit');
   });
   this.route('login');
   this.route('logout');
