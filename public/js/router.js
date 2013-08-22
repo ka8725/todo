@@ -6,6 +6,7 @@ App.Router.map(function () {
     this.route('edit');
   });
   this.route('login');
+  this.route('logout');
   this.route('register');
 });
 
@@ -68,11 +69,18 @@ App.TodosNewRoute = App.AuthenticatedRoute.extend({
 
 App.TodoRoute = App.AuthenticatedRoute.extend({
   setupController: function(controller, model) {
-    this.controllerFor('todo.edit').set('model', model);
-    this._super(controller, model);
+    controllerFor('todo.edit').set('model', model);
+    _super(controller, model);
   },
 
   model: function(params) {
     return App.Todo.find(params.todo_id);
+  }
+});
+
+App.LogoutRoute = Ember.Route.extend({
+  redirect: function() {
+    this.controllerFor('login').set('token', null);
+    this.transitionTo('login');
   }
 });

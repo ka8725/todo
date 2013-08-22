@@ -6,8 +6,6 @@ require 'securerandom'
 require 'bcrypt'
 require 'debugger'
 
-# ActiveRecord::Base.include_root_in_json = true
-
 dbconfig = (YAML.load_file('config/database.yml') || {}).merge(:encoding => 'utf8')
 ActiveRecord::Base.establish_connection(dbconfig)
 
@@ -22,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :todos
 
   def self.auth(username, pwd)
-    find_by_username(username) if user.authenticate(pwd)
+    find_by_username(username).try(:authenticate, pwd)
   end
 
   def token
@@ -62,12 +60,16 @@ end
 
 
 post '/register' do
-  user = User.new({:username => params[:username], :password => params[:password]})
+  user = User.new({
+    :username => params[:username],
+    :password => params[:password],
+    :password_confirmation => params[:password]
+  })
 
   if user.save
-    user.to_json
+    {:user => user}.to_json
   else
-    halt 422, user.errors.to_json
+    halt 422, {:errors => user.errors}.to_json
   end
 end
 

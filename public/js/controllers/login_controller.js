@@ -10,7 +10,12 @@ App.LoginController = Ember.Controller.extend({
 
   token: localStorage.token,
   tokenChanged: function() {
-    localStorage.token = this.get('token');
+    var t = this.get('token');
+    if (t == null) {
+      localStorage.removeItem('token');
+    } else {
+      localStorage.token = t;
+    }
   }.observes('token'),
 
   login: function() {

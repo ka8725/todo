@@ -15,6 +15,7 @@
         {{#linkTo 'todos'}}todos{{/linkTo}}
         {{#linkTo 'register'}}register{{/linkTo}}
         {{#linkTo 'login'}}login{{/linkTo}}
+        {{#linkTo 'logout'}}logout{{/linkTo}}
       </div>
       <br>
       {{outlet}}
@@ -22,7 +23,7 @@
 
     <script type="text/x-handlebars" data-template-name='register'>
       {{input value=username type="text" placeholder="Username"}}
-      {{input value=password placeholder="Password"}}
+      {{input value=password type="password" placeholder="Password"}}
       <button {{action "register"}}>Register</button>
       {{#if errorMessage}}
         <div>{{errorMessage}}</div>
@@ -40,7 +41,7 @@
         <p>You are already logged in!</p>
       {{else}}
         {{input value=username type="text" placeholder="Username"}}
-        {{input value=password placeholder="Password"}}
+        {{input value=password type="password" placeholder="Password"}}
         <button {{action "login"}}>Login</button>
         {{#if errorMessage}}
           <div>{{errorMessage}}</div>
