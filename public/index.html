@@ -51,7 +51,7 @@
 
     <script type="text/x-handlebars" data-template-name="todos/new">
       {{partial 'todo/form'}}
-      <button {{action "create"}}>Create</button>
+      <button {{action "create"}} type='submit'>Create</button>
       {{#linkTo 'todos'}}cancel{{/linkTo}}
     </script>
 

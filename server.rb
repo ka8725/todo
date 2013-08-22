@@ -37,9 +37,10 @@ class User < ActiveRecord::Base
 end
 
 class Todo < ActiveRecord::Base
-  validates :title, :presence => true
-  validates :priority, :presence => true
-  validates :due_date, :presence => true
+  validates_presence_of :title
+  validates_presence_of :priority
+  validates_presence_of :due_date
+  validates_numericality_of :priority, :only_integer => true
 
   belongs_to :user
 end
