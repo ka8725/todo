@@ -32,26 +32,14 @@ App.AuthenticatedRoute = Ember.Route.extend({
   },
 
   redirectToLogin: function(transition) {
-    alert('You must log in!');
-
     var loginController = this.controllerFor('login');
     loginController.set('attemptedTransition', transition);
-    this.transitionToRoute('login');
+    this.transitionTo('login');
   },
 
   getJSONWithToken: function(url) {
     var token = this.controllerFor('login').get('token');
     return $.getJSON(url, { token: token });
-  },
-
-  events: {
-    error: function(reason, transition) {
-      if (reason.status === 401) {
-        this.redirectToLogin(transition);
-      } else {
-        alert('Something went wrong');
-      }
-    }
   }
 });
 
@@ -69,8 +57,8 @@ App.TodosNewRoute = App.AuthenticatedRoute.extend({
 
 App.TodoRoute = App.AuthenticatedRoute.extend({
   setupController: function(controller, model) {
-    controllerFor('todo.edit').set('model', model);
-    _super(controller, model);
+    this.controllerFor('todo.edit').set('model', model);
+    this._super(controller, model);
   },
 
   model: function(params) {
