@@ -5,6 +5,10 @@ App.TodosNewController = Ember.ObjectController.extend({
 
     var self = this;
 
+    todo.on('becameInvalid', function(todo) {
+      self.set('model', todo);
+    });
+
     todo.on('didCreate', function() {
       self.set('title', '');
       self.set('priority', '');

@@ -49,12 +49,23 @@
     </script>
 
     <script type="text/x-handlebars" data-template-name="todos/new">
-      {{input type='number' class="input" placeholder="Priority" value=priority}}
-      <span>{{errors.priority}}</span>
-      {{input class="input" placeholder="What needs to be done?" value=title}}
-      <span>{{errors.title}}</span>
-      {{input type='date' class="input" placeholder="Due date" value=due_date}}
-      <span>{{errors.due_date}}</span>
+      <div>
+        {{input type='number' class="input" placeholder="Priority" value=priority}}
+        {{errors.priority}}
+      </div>
+      <br>
+
+      <div>
+        {{input class="input" placeholder="What needs to be done?" value=title}}
+        <span>{{errors.title}}</span>
+      </div>
+      <br>
+
+      <div>
+        {{input type='date' class="input" placeholder="Due date" value=due_date}}
+        <span>{{errors.due_date}}</span>
+      </div>
+      <br>
 
       <button {{action "create"}}>Create</button>
     </script>
