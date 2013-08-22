@@ -83,10 +83,17 @@ post '/todos' do
     todo = current_user.todos.build(todo_params)
 
     if todo.save
-      todo.to_json
+      {:todo => todo}.to_json
     else
       halt 422, {:errors => todo.errors}.to_json
     end
+  end
+end
+
+get '/todos/:id' do
+  with_current_user do
+    todo = current_user.todos.find(params[:id])
+    {:todo => todo}.to_json
   end
 end
 
@@ -94,9 +101,9 @@ put '/todos/:id' do
   with_current_user do
     todo = current_user.todos.find(params[:id])
     if todo.update_attributes(todo_params)
-      todo.to_json
+      {:todo => todo}.to_json
     else
-      halt 422, todo.errors.to_json
+      halt 422, {:errors => todo.errors}.to_json
     end
   end
 end
@@ -106,7 +113,7 @@ delete '/todos/:id' do
     todo = current_user.todos.find(params[:id])
 
     if todo.destroy
-      todo.to_json
+      {:todo => todo}.to_json
     else
       halt 422, todo.errors.to_json
     end

@@ -68,7 +68,33 @@
       <br>
 
       <button {{action "create"}}>Create</button>
+      {{#linkTo 'todos'}}cancel{{/linkTo}}
     </script>
+
+
+    <script type="text/x-handlebars" data-template-name="todo/edit">
+      <div>
+        {{input type='number' class="input" placeholder="Priority" value=priority}}
+        {{errors.priority}}
+      </div>
+      <br>
+
+      <div>
+        {{input class="input" placeholder="What needs to be done?" value=title}}
+        <span>{{errors.title}}</span>
+      </div>
+      <br>
+
+      <div>
+        {{input type='date' class="input" placeholder="Due date" value=due_date}}
+        <span>{{errors.due_date}}</span>
+      </div>
+      <br>
+
+      <button {{action "update"}}>Update</button>
+      {{#linkTo 'todos'}}cancel{{/linkTo}}
+    </script>
+
 
     <script type="text/x-handlebars" data-template-name='todo/_edit'>
       {{input type='number' class="input" placeholder="Priority" value=priority}}
@@ -98,7 +124,7 @@
                       <label>{{priority}}</label>
                       <label>{{title}}</label>
                       <label>{{date due_date}}</label>
-                      <button {{action "editTodo"}} class="edit-button">Edit</button>
+                      {{#linkTo 'todo.edit' this}}edit{{/linkTo}}
                       <button {{action "removeTodo"}} class="destroy">Delete</button>
                     {{/if}}
                   </li>
@@ -123,6 +149,7 @@
     <script src="js/models/todo.js"></script>
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todos_new_controller.js"></script>
+    <script src="js/controllers/todo_edit_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
     <script src="js/controllers/register_controller.js"></script>
     <script src="js/controllers/login_controller.js"></script>

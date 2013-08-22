@@ -2,6 +2,9 @@ App.Router.map(function () {
   this.resource('todos', function() {
     this.route('new');
   });
+  this.resource('todo', { path: '/todo/:todo_id' }, function() {
+    this.route('edit');
+  });
   this.route('login');
   this.route('register');
 });
@@ -32,7 +35,7 @@ App.AuthenticatedRoute = Ember.Route.extend({
 
     var loginController = this.controllerFor('login');
     loginController.set('attemptedTransition', transition);
-    this.transitionTo('login');
+    this.transitionToRoute('login');
   },
 
   getJSONWithToken: function(url) {
@@ -60,5 +63,16 @@ App.TodosRoute = App.AuthenticatedRoute.extend({
 App.TodosNewRoute = App.AuthenticatedRoute.extend({
   model: function() {
     return App.Todo.find();
+  }
+});
+
+App.TodoRoute = App.AuthenticatedRoute.extend({
+  setupController: function(controller, model) {
+    this.controllerFor('todo.edit').set('model', model);
+    this._super(controller, model);
+  },
+
+  model: function(params) {
+    return App.Todo.find(params.todo_id);
   }
 });

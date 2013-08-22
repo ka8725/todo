@@ -1,7 +1,8 @@
-App.TodosNewController = Ember.ObjectController.extend({
-  create: function(todo) {
+App.TodoEditController = Ember.ObjectController.extend({
+  update: function() {
+    var todo = this.get('model');
     var data = this.getProperties('title', 'priority', 'due_date');
-    var todo = App.Todo.createRecord(data);
+    todo.setProperties(data);
 
     var self = this;
 
@@ -9,7 +10,7 @@ App.TodosNewController = Ember.ObjectController.extend({
       self.set('model', todo);
     });
 
-    todo.on('didCreate', function() {
+    todo.on('didUpdate', function() {
       self.transitionToRoute('todos');
     });
     todo.save();
