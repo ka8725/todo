@@ -64,7 +64,7 @@ App.TodosRoute = App.AuthenticatedRoute.extend({
 
 App.TodosNewRoute = App.AuthenticatedRoute.extend({
   model: function() {
-    return App.Todo.find();
+    return App.Todo.createRecord({});
   }
 });
 
