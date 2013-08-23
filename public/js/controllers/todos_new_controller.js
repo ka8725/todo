@@ -10,6 +10,9 @@ App.TodosNewController = Ember.ObjectController.extend({
     });
 
     todo.on('didCreate', function() {
+      self.set('priority', '');
+      self.set('title', '');
+      self.set('due_date', '');
       self.transitionToRoute('todos');
     });
     todo.save();
