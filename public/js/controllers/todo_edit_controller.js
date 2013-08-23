@@ -1,9 +1,5 @@
 App.TodoEditController = Ember.ObjectController.extend({
-  update: function() {
-    var todo = this.get('model');
-    var data = this.getProperties('title', 'priority', 'due_date');
-    todo.setProperties(data);
-
+  update: function(todo) {
     var self = this;
 
     todo.on('becameInvalid', function(todo) {

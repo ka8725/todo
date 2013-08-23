@@ -65,14 +65,14 @@
 
     <script type="text/x-handlebars" data-template-name="todos/new">
       {{partial 'todo/form'}}
-      <button {{action "create"}} type='submit'>Create</button>
+      <button {{action "create" this}} type='submit'>Create</button>
       <a href='#' {{action 'cancel' this}}>cancel</a>
     </script>
 
 
     <script type="text/x-handlebars" data-template-name="todo/edit">
       {{partial 'todo/form'}}
-      <button {{action "update"}}>Update</button>
+      <button {{action "update" this}}>Update</button>
       <a href='#' {{action 'cancel' this}}>cancel</a>
     </script>
 
