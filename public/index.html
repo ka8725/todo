@@ -66,7 +66,7 @@
     <script type="text/x-handlebars" data-template-name="todos/new">
       {{partial 'todo/form'}}
       <button {{action "create"}} type='submit'>Create</button>
-      {{#linkTo 'todos'}}cancel{{/linkTo}}
+      <a href='#' {{action 'cancel' this}}>cancel</a>
     </script>
 
 
@@ -107,15 +107,13 @@
           <section id="main">
             <ul id="todo-list" class="sortable">
               {{#each model itemController='todo'}}
-                {{#unless isNew}}
-                  <li data-id="{{unbound id}}">
-                    <label>{{priority}}</label>
-                    <label>{{title}}</label>
-                    <label>{{date due_date}}</label>
-                    {{#linkTo 'todo.edit' this}}edit{{/linkTo}}
-                    <button {{action "removeTodo"}} class="destroy">Delete</button>
-                  </li>
-                {{/unless}}
+                <li data-id="{{unbound id}}">
+                  <label>{{priority}}</label>
+                  <label>{{title}}</label>
+                  <label>{{date due_date}}</label>
+                  {{#linkTo 'todo.edit' this}}edit{{/linkTo}}
+                  <button {{action "removeTodo"}} class="destroy">Delete</button>
+                </li>
               {{/each}}
             </ul>
           </section>
