@@ -47,12 +47,19 @@
       {{#if token}}
         <p>You are already logged in!</p>
       {{else}}
-        {{input value=username type="text" placeholder="Username"}}
-        {{input value=password type="password" placeholder="Password"}}
-        <button {{action "login"}}>Login</button>
         {{#if errorMessage}}
           <div>{{errorMessage}}</div>
         {{/if}}
+        <div>
+          {{input value=username type="text" placeholder="Username"}}
+        </div>
+        <br>
+        <div>
+          {{input value=password type="password" placeholder="Password"}}
+        </div>
+        <br>
+
+        <button {{action "login"}}>Login</button>
       {{/if}}
     </script>
 

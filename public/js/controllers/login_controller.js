@@ -39,7 +39,8 @@ App.LoginController = Ember.Controller.extend({
         }
       })
       .fail(function(response) {
-        self.set('errorMessage', response.responseText);
+        var err = JSON.parse(response.responseText);
+        self.set('errorMessage', err['error']);
       });
   }
 });
