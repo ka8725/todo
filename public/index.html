@@ -5,7 +5,6 @@
     <title>Todo</title>
   </head>
   <body>
-
     <script type="text/x-handlebars" data-template-name="loading">
       <h1>Loading...</h1>
     </script>
@@ -14,10 +13,10 @@
       <div>
         {{#if isLoggedIn}}
           {{#linkTo 'todos'}}todos{{/linkTo}}
-          {{#linkTo 'register'}}register{{/linkTo}}
+          {{#linkTo 'users.new'}}register{{/linkTo}}
           {{#linkTo 'logout'}}logout{{/linkTo}}
         {{else}}
-          {{#linkTo 'register'}}register{{/linkTo}}
+          {{#linkTo 'users.new'}}register{{/linkTo}}
           {{#linkTo 'login'}}login{{/linkTo}}
         {{/if}}
       </div>
@@ -25,14 +24,18 @@
       {{outlet}}
     </script>
 
-    <script type="text/x-handlebars" data-template-name='register'>
-      {{input value=username type="text" placeholder="Username"}}
-      {{input value=password type="password" placeholder="Password"}}
+    <script type="text/x-handlebars" data-template-name='users/new'>
+      <div>
+        {{input value=username type="text" placeholder="Username"}}
+        <span>{{errors.username}}</span>
+      </div>
+      <br>
+      <div>
+        {{input value=password type="password" placeholder="Password"}}
+        <span>{{errors.password}}</span>
+      </div>
+      <br>
       <button {{action "register"}}>Register</button>
-      {{#if errorMessage}}
-        <div>{{errorMessage}}</div>
-      {{/if}}
-
     </script>
 
     <script type="text/x-handlebars" data-template-name='index'>
@@ -70,7 +73,7 @@
     <script type="text/x-handlebars" data-template-name='todo/_form'>
       <div>
         {{input type='number' class="input" placeholder="Priority" value=priority}}
-        {{errors.priority}}
+        <span>{{errors.priority}}</span>
       </div>
       <br>
 
@@ -124,12 +127,13 @@
 
     <script src="js/models/store.js"></script>
     <script src="js/models/todo.js"></script>
+    <script src="js/models/user.js"></script>
 
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todos_new_controller.js"></script>
     <script src="js/controllers/todo_edit_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
-    <script src="js/controllers/register_controller.js"></script>
+    <script src="js/controllers/users_new_controller.js"></script>
     <script src="js/controllers/login_controller.js"></script>
 
     <script src="js/views/drag_todo_view.js"></script>

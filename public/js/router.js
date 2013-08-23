@@ -6,9 +6,11 @@ App.Router.map(function () {
 
     this.route('new');
   });
+  this.resource('users', function() {
+    this.route('new');
+  });
   this.route('login');
   this.route('logout');
-  this.route('register');
 });
 
 App.LoginRoute = Ember.Route.extend({
@@ -81,6 +83,12 @@ App.LogoutRoute = Ember.Route.extend({
   redirect: function() {
     this.controllerFor('login').set('token', null);
     this.transitionTo('login');
+  }
+});
+
+App.UsersNewRoute = Ember.Route.extend({
+  model: function() {
+    return App.User.createRecord({});
   }
 });
 
