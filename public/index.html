@@ -106,13 +106,13 @@
 
           <section id="main">
             <ul id="todo-list" class="sortable">
-              {{#each model itemController='todo'}}
+              {{#each item in sortedContent itemController='todo'}}
                 <li data-id="{{unbound id}}">
                   <label>{{priority}}</label>
                   <label>{{title}}</label>
                   <label>{{date due_date}}</label>
                   {{#linkTo 'todo.edit' this}}edit{{/linkTo}}
-                  <button {{action "removeTodo"}} class="destroy">Delete</button>
+                  <a href='#' {{action 'removeTodo'}}>delete</a>
                 </li>
               {{/each}}
             </ul>
