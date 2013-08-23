@@ -14,5 +14,10 @@ App.TodoEditController = Ember.ObjectController.extend({
       self.transitionToRoute('todos');
     });
     todo.save();
+  },
+
+  cancel: function(todo) {
+    todo.rollback();
+    this.transitionToRoute('todos');
   }
 });

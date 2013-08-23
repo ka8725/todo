@@ -73,7 +73,7 @@
     <script type="text/x-handlebars" data-template-name="todo/edit">
       {{partial 'todo/form'}}
       <button {{action "update"}}>Update</button>
-      {{#linkTo 'todos'}}cancel{{/linkTo}}
+      <a href='#' {{action 'cancel' this}}>cancel</a>
     </script>
 
 
